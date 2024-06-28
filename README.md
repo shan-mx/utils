@@ -49,7 +49,7 @@ await withRetry(3, async (retries, lastErr) => {
   console.log(`Retries: ${retries}`);
   if (lastErr) console.log(`Last Error: ${lastErr.message}`);
 
-  if (retries >= 2) return;
+  if (retries === 3) return;
   throw new Error("Something went wrong!");
 })();
 ```

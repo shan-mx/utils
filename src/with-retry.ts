@@ -15,7 +15,7 @@ export const withRetry = <Return>(
   return async (): Promise<Return> => {
     let lastError: Error | undefined;
 
-    for (let i = 0; i < times; i++) {
+    for (let i = 0; i <= times; i++) {
       try {
         const result = logic(i, lastError);
 
@@ -23,7 +23,7 @@ export const withRetry = <Return>(
       } catch (error) {
         if (error instanceof Error) {
           lastError = error;
-          if (i === times - 1) {
+          if (i === times) {
             throw error;
           }
         }
