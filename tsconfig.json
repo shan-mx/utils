@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["vitest/globals"],
+    "module": "ESNext",
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "moduleResolution": "Bundler",
+    "esModuleInterop": true,
+    "strict": true,
+    "outDir": "dist",
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules"]
+}

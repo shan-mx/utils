@@ -1,0 +1,27 @@
+{
+  "name": "@mxkit/utils",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "pnpm lint --fix",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:ui": "pnpm test -- --coverage --ui",
+    "coverage": "pnpm test -- run --coverage"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin": "^2.2.2",
+    "@types/eslint": "^8.56.10",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/ui": "^1.6.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-perfectionist": "^2.11.0",
+    "eslint-plugin-unicorn": "^54.0.0",
+    "eslint-plugin-unused-imports": "^3.2.0",
+    "prettier": "^3.3.2",
+    "typescript": "~5.5.2",
+    "vitest": "^1.6.0"
+  }
+}

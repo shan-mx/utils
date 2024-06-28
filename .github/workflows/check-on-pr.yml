@@ -1,0 +1,45 @@
+name: Check on PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9.4.0
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run typecheck
+        run: pnpm run typecheck
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Run ESLint
+        run: pnpm run lint:fix
+
+      - name: Run Prettier
+        run: pnpm run format
+
+      - name: Commit code style changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "style: auto fix"
+          branch: ${{ github.head_ref }}
