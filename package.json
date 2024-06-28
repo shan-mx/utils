@@ -4,7 +4,7 @@
   "scripts": {
     "lint": "eslint . --ext .ts",
     "lint:fix": "pnpm lint --fix",
-    "format": "prettier --write .",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:ui": "pnpm test -- --coverage --ui",
