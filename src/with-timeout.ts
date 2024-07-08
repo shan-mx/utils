@@ -1,4 +1,15 @@
 /**
+ * Represents an error that occurs when a timeout is reached.
+ */
+class TimeoutError extends Error {
+  constructor({ message, cause }: { message: string; cause: string }) {
+    super(message);
+    this.name = "TimeoutError";
+    this.cause = cause;
+  }
+}
+
+/**
  * Wraps a function with a timeout, returning a promise that resolves with the function's return value or rejects with a timeout error.
  *
  * @param timeout - The timeout duration in milliseconds.
@@ -17,7 +28,10 @@ export const withTimeout = <Args extends any[], Return>(
     const timeoutPromise = new Promise((_, reject) =>
       setTimeout(() => {
         return reject(
-          new Error(`Operation '${name}' timed out after ${timeout}ms`),
+          new TimeoutError({
+            message: `Operation '${name}' timed out after ${timeout}ms`,
+            cause: name,
+          }),
         );
       }, timeout),
     );
