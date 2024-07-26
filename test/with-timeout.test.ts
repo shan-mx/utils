@@ -1,4 +1,5 @@
 import { sleep } from "@/sleep";
+import { withCatch } from "@/with-catch";
 import { withTimeout } from "@/with-timeout";
 
 describe("withTimeout", () => {
@@ -27,5 +28,15 @@ describe("withTimeout", () => {
     const fn = () => "result";
     const result = withTimeout(1, "fn", fn)();
     await expect(result).resolves.toBe("result");
+  });
+
+  it("should throw timeout error", async () => {
+    const fn = async () => {
+      await sleep(2000);
+    };
+
+    const [err, _] = await withCatch(withTimeout(20, "fn", fn))();
+
+    expect(err?.name).toBe("TimeoutError");
   });
 });
