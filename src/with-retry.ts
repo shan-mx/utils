@@ -8,10 +8,10 @@ import { isPromise } from "./is-promise";
  * @returns A promise that resolves to the return value of the function.
  * @throws The error thrown by the function after all retries are exhausted.
  */
-export const withRetry = <Return>(
+export function withRetry<Return>(
   times: number,
   logic: (retries: number, lastError: Error | undefined) => Return,
-): (() => Promise<Return>) => {
+): () => Promise<Return> {
   return async (): Promise<Return> => {
     let lastError: Error | undefined;
 
@@ -32,4 +32,4 @@ export const withRetry = <Return>(
 
     return undefined as never;
   };
-};
+}
