@@ -12,9 +12,9 @@ type WithCatch<Return> =
  * @param func - The function to be wrapped.
  * @returns An array containing the error and the result of the function. The error is undefined if the function executed successfully.
  */
-export const withCatch = <Args extends any[], Return>(
+export function withCatch<Args extends any[], Return>(
   func: (...args: Args) => Return,
-): ((...args: Args) => WithCatch<Return>) => {
+): (...args: Args) => WithCatch<Return> {
   return (...args: Args): WithCatch<Return> => {
     try {
       const result = func(...args);
@@ -31,4 +31,4 @@ export const withCatch = <Args extends any[], Return>(
       return [error as any, undefined] as WithCatch<Return>;
     }
   };
-};
+}

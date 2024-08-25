@@ -11,9 +11,9 @@ type WithTime<Return> =
  * @param func - The function to be timed.
  * @returns If the return type of the function is a Promise, it returns a Promise that resolves to an array containing the elapsed time and the result. Otherwise, it returns an array containing the elapsed time and the result.
  */
-export const withTime = <Args extends any[], Return>(
+export function withTime<Args extends any[], Return>(
   func: (...args: Args) => Return,
-): ((...args: Args) => WithTime<Return>) => {
+): (...args: Args) => WithTime<Return> {
   return (...args: Args): WithTime<Return> => {
     const start = performance.now();
     const result = func(...args);
@@ -26,4 +26,4 @@ export const withTime = <Args extends any[], Return>(
 
     return [performance.now() - start, result] as WithTime<Return>;
   };
-};
+}

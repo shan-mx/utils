@@ -18,11 +18,11 @@ class TimeoutError extends Error {
  * @returns A promise that resolves with the function's return value or rejects with a timeout error.
  * @throws If the function throws an error before the timeout.
  */
-export const withTimeout = <Args extends any[], Return>(
+export function withTimeout<Args extends any[], Return>(
   timeout: number,
   name: string,
   func: (...args: Args) => Return,
-): ((...args: Args) => Promise<Return>) => {
+): (...args: Args) => Promise<Return> {
   return (...args: Args): Promise<Return> => {
     const result = Promise.resolve(func(...args));
     const timeoutPromise = new Promise((_, reject) =>
@@ -38,4 +38,4 @@ export const withTimeout = <Args extends any[], Return>(
 
     return Promise.race([result, timeoutPromise]) as Promise<Return>;
   };
-};
+}
